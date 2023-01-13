@@ -28,6 +28,7 @@ class Program
             {
                 Console.WriteLine("Lower");
             }
+            
         }
 
 
@@ -40,13 +41,13 @@ class Program
         //int x = int.Parse(magicNumber);
         //int y = int.Parse(guessNumber);
 
-        //if (x > y)
-        //{
+       //if (x > y)
+       //{
        //     Console.WriteLine("Higher");
        // }
        // else if (x < y)
        // {
-//Console.WriteLine("Lower");
+       //Console.WriteLine("Lower");
        // }
        // else
        // {
