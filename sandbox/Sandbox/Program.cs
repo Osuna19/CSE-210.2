@@ -26,7 +26,7 @@ namespace Develop02
                 Console.WriteLine("3. Save");
                 Console.WriteLine("4. Load");
                 Console.WriteLine("5. Exit");
-                Console.WriteLine("What would you like to do?");
+                Console.Write("What would you like to do? ");
 
                 int option = int.Parse(Console.ReadLine());
                 if (option == 1)
@@ -40,9 +40,10 @@ namespace Develop02
                     return randomPrompt;
 
         }
-                    Console.Write("Write on your Journal: ");
+                    Console.Write("Write on your Journal : ");
                     string text = Console.ReadLine();
                     journal.AddEntry(text);
+                    Console.WriteLine("");
                 }
                 else if (option == 2)
                 {
