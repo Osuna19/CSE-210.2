@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.IO;
 
 namespace Develop02
 {
@@ -14,7 +15,7 @@ namespace Develop02
 
     class Menu
     {
-        private Journal journal = new Journal();
+        public Journal journal = new Journal();
 
         public void displayMenu()
         {
@@ -29,25 +30,38 @@ namespace Develop02
                 Console.Write("What would you like to do? ");
 
                 int option = int.Parse(Console.ReadLine());
+                
                 if (option == 1)
                 {
-                    string randomPrompt(){
-                    var prompts = new List<String> { "how are you feeling?", "Tell us a secret", "How doy you with the homework?"};   
+
+                    var prompts = new List<String> 
+                    { "Who was the most interesting person I interacted with today?", "Tell us a secret", "What was the worst part of the day?", 
+                    "What is the next type of music you will listen to?", "Is there wa something that get you mad today?"};   
                     var rdm = new Random();
-                    var randomIndex = rdm.Next(prompts.Count());
-                    var randomPrompt = prompts[randomIndex];
-
-                    return randomPrompt;
-
-        }
-                    Console.Write("Write on your Journal : ");
+                    var randomIndex = rdm.Next(prompts.Count);
+        
+                    Console.WriteLine(prompts[randomIndex]);
+                    Console.Write("Write on your Journal: ");
                     string text = Console.ReadLine();
-                    journal.AddEntry(text);
-                    Console.WriteLine("");
+                    DateTime currentDate = DateTime.Now;
+                    journal.AddEntry(text, currentDate);
+                    Console.WriteLine();
                 }
                 else if (option == 2)
                 {
                     journal.displayEntries();
+                }
+                else if (option == 3)
+                {
+                    Console.WriteLine("Enter a file name to save: ");
+                    string fileName = Console.ReadLine();
+                    journal.save(fileName);
+                }
+                else if (option == 4)
+                {
+                    Console.WriteLine("write the file name to load: ");
+                    string fileName = Console.ReadLine();
+                    journal.Load(fileName);
                 }
                 else if (option == 5)
                 {
@@ -55,7 +69,7 @@ namespace Develop02
                 }
                 else 
                 {
-                    Console.WriteLine("Select the correct option.");
+                    Console.WriteLine("Select a valid option.");
                 }
             }
         }
@@ -64,11 +78,36 @@ namespace Develop02
     class Journal
     {
 
+        public void save(string fileName){
+            using (var file = new StreamWriter(fileName))
+            {
+                foreach (var entry in entries)
+                {
+                    file.WriteLine(entry.Date.ToString());
+                    file.WriteLine(entry.Text);
+                }
+            }
+        }
 
-        private List<Entry> entries = new List<Entry>();
-        public void AddEntry(string journalText)
+        public void Load(string fileName)
         {
-            var entry = new Entry();
+            if (!File.Exists(fileName))
+                    {
+                        Console.WriteLine("File was not found. Try again.");
+                    }
+            else{
+
+                using (var load = new StreamReader(fileName))
+                    {
+                        string date = load.ReadLine();
+                        string text = load.ReadLine();
+                    }
+                }
+        }
+        public List<Entry> entries = new List<Entry>();
+        public void AddEntry(string journalText, DateTime currentDate)
+        {
+            var entry = new Entry(DateTime.Now);
             entry.Text = journalText;
             entries.Add(entry);
         }
@@ -78,7 +117,8 @@ namespace Develop02
             int i = 1; 
             foreach (var entry in entries)
             {
-                Console.WriteLine($"{entry.Text}");
+                Console.WriteLine($"Date: {entry.Date.ToString()} - {entry.Text} ");
+                Console.WriteLine("");
                 i++;
             }
         }
@@ -87,8 +127,16 @@ namespace Develop02
 
     class Entry
     {
-        public string Text {get; set;}
+        public string Text { get; set; }
+        public DateTime Date { get; set; }
 
+            public Entry(DateTime date)
+        {
+            Date = date;
+        }
+         public Entry(string text)
+        {
+            Text = text;
+        }
     }
 }
-
