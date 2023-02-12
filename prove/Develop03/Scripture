@@ -1,0 +1,80 @@
+using System;
+public class Scripture{
+    private string _originalVerse;
+    private string[] _words;
+    private List<bool> _isReplaced;
+
+    public Scripture(string verse)
+    {
+        _originalVerse = verse;
+        _words = verse.Split(' ');
+        _isReplaced = new List<bool>(_words.Length);
+
+        for (int i = 0; i < _words.Length; i++)
+        {
+            _isReplaced.Add(false);
+        }
+    }
+    public Scripture(string originalVerse, string[] words, List<bool> isReplaced) : this(originalVerse)
+    {
+        _words = words;
+        _isReplaced = isReplaced;
+    }
+
+    public string[] Words
+{
+    get
+    {
+        return _words;
+    }
+}
+
+
+    public bool IsCompletelyReplaced
+    {
+        get
+        {
+            return _isReplaced.All(replaced => replaced == true);
+        }
+    }
+
+    public string OriginalVerse
+    {
+        get
+        {
+            return _originalVerse;
+        }
+    }
+
+    public void ReplaceWord(int number)
+    {
+        _isReplaced[number] = true;
+    }
+
+    public override string ToString()
+    {
+        string verse = "";
+
+        for (int i = 0; i < _words.Length; i++)
+        {
+            if (_isReplaced[i])
+            {
+                verse += "_ ";
+            }
+            else
+            {
+                verse += _words[i] + " ";
+            }
+        }
+
+        return verse;
+    }
+
+        public List<bool> Replace
+    {
+        get
+        {
+            return _isReplaced;
+        }
+    }
+}
