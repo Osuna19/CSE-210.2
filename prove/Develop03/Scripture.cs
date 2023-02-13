@@ -1,8 +1,9 @@
-using System;
+
 public class Scripture{
     private string _originalVerse;
-    private string[] _words;
+    private string[]  _words;
     private List<bool> _isReplaced;
+    private Scripture verse;
 
     public Scripture(string verse)
     {
@@ -12,6 +13,7 @@ public class Scripture{
 
         for (int i = 0; i < _words.Length; i++)
         {
+            _words[i] = new string('_', _words[i].Length);
             _isReplaced.Add(false);
         }
     }
@@ -19,6 +21,11 @@ public class Scripture{
     {
         _words = words;
         _isReplaced = isReplaced;
+    }
+
+    public Scripture(Scripture verse)
+    {
+        this.verse = verse;
     }
 
     public string[] Words
@@ -53,21 +60,21 @@ public class Scripture{
 
     public override string ToString()
     {
-        string verse = "";
+          string verse = "";
 
-        for (int i = 0; i < _words.Length; i++)
-        {
+         for (int i = 0; i < _words.Length; i++)
+        {                
             if (_isReplaced[i])
-            {
-                verse += "_ ";
-            }
-            else
-            {
-                verse += _words[i] + " ";
-            }
+              {
+                  verse += new string('_', _words[i].Length) + " ";
+              }
+              else
+              {
+                  verse += _words[i] + " ";
+             }
         }
 
-        return verse;
+        return verse.TrimEnd();
     }
 
         public List<bool> Replace

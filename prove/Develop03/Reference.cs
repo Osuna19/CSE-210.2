@@ -5,10 +5,10 @@ public class Reference{
     private int? _endverse;
 
     public Reference(){
-        _book = "3 Nephi";
-       _chapter = 11;
-       _startVerse = 10;
-       _endverse  = 12;
+        _book = "Moses";
+       _chapter = 1;
+       _startVerse = 49;
+       _endverse  = 50;
     }
 
 
@@ -28,9 +28,7 @@ public class Reference{
     }        
 
     public string getReference(){
-        string reference = $"{_book} {_chapter}: {_startVerse}";
+        string reference = $"{_book} {_chapter}:{_startVerse} ";
         return reference; 
     }
 }
-
-
