@@ -5,13 +5,13 @@ class Program
 {
     static void Main(string[] args)
     {
-        Scripture verse = new Scripture("For behold, this is my work and my glory, to bring to pass the immortality and eternal life of man.");
-        Word word = new Word(verse);
+        Scripture scripture = new Scripture("For behold, this is my work and my glory, to bring to pass the inmmortality and eternal life of man.");
+        Word word = new Word(scripture);
         Reference chapter = new Reference();
         while (true)
         {
             Console.Clear(); 
-            Console.WriteLine(chapter.getReference() + verse.ToString());
+            Console.WriteLine(chapter.getReference() + scripture.ToString());
             Console.WriteLine();
             Console.WriteLine("Press Enter to replace another word. Type quit to end program.");
             string endProgram = Console.ReadLine();
@@ -19,10 +19,10 @@ class Program
                 break;
             }
 
+            word.ReplaceRandomWord();
             Console.ReadLine();
-            word.replaceWord();
 
-            if (verse.IsCompletelyReplaced)
+            if (scripture.IsCompletelyReplaced)
             {
                 
                 Console.WriteLine("All words are replaced.");
@@ -33,7 +33,7 @@ class Program
                     Console.WriteLine("You learned a new scripture!");
                 }
                 else {
-                    Console.WriteLine("Oh, you almost got it! the scripture was " + verse.OriginalVerse);
+                    Console.WriteLine("Oh, you almost got it! the scripture was " + scripture.OriginalVerse);
                 }
                 break;
             }

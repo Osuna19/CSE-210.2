@@ -1,23 +1,18 @@
-
 public class Scripture{
     private string _originalVerse;
     private string[]  _words;
-    private List<bool> _isReplaced;
+    private bool[] _isReplaced;
+    private Random _random;
     private Scripture verse;
 
     public Scripture(string verse)
     {
         _originalVerse = verse;
         _words = verse.Split(' ');
-        _isReplaced = new List<bool>(_words.Length);
-
-        for (int i = 0; i < _words.Length; i++)
-        {
-            _words[i] = new string('_', _words[i].Length);
-            _isReplaced.Add(false);
-        }
+        _isReplaced = new bool[_words.Length];
+        _random = new Random();
     }
-    public Scripture(string originalVerse, string[] words, List<bool> isReplaced) : this(originalVerse)
+    public Scripture(string originalVerse, string[] words, bool[] isReplaced) : this(originalVerse)
     {
         _words = words;
         _isReplaced = isReplaced;
@@ -29,13 +24,12 @@ public class Scripture{
     }
 
     public string[] Words
-{
-    get
     {
-        return _words;
+        get
+        {
+            return _words;
+        }
     }
-}
-
 
     public bool IsCompletelyReplaced
     {
@@ -55,6 +49,7 @@ public class Scripture{
 
     public void ReplaceWord(int number)
     {
+        _words[number] = _originalVerse.Split(' ')[number];
         _isReplaced[number] = true;
     }
 
@@ -64,20 +59,20 @@ public class Scripture{
 
          for (int i = 0; i < _words.Length; i++)
         {                
+            
             if (_isReplaced[i])
               {
-                  verse += new string('_', _words[i].Length) + " ";
+                 verse += new string('_', _words[i].Length) + " ";
               }
               else
               {
-                  verse += _words[i] + " ";
-             }
+                    verse += _words[i] + ' '; 
+              }
         }
 
-        return verse.TrimEnd();
+        return verse;
     }
-
-        public List<bool> Replace
+        public bool[] Replace
     {
         get
         {
