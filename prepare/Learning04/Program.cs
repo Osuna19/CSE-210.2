@@ -2,7 +2,16 @@ class Program
 {
     static void Main(string[] args)
     {
+        Assignment info = new Assignment("Osuna Ramirez", "Multiplication");
+        Console.WriteLine(info.getSummary());
 
+        MathAssignment info2 = new MathAssignment("Don Julion", "Linear inequalities", "3.4", "12-19");
+        Console.WriteLine(info2.getSummary());
+        Console.WriteLine(info2.getHomework());
+
+        WritingAssignment info3 = new WritingAssignment("Juan el luchador", "Basic writting", "Commas");
+        Console.WriteLine(info3.getSummary());
+        Console.WriteLine(info3.getInformation());
     }
 }
 
@@ -24,6 +33,10 @@ class Assignment{
     public string getTopic() {
         return _topic;
     }
+
+    public string getSummary(){
+        return _studentName + " - " + _topic;
+    }
 }
 
 class MathAssignment: Assignment {
@@ -34,11 +47,21 @@ class MathAssignment: Assignment {
         _textBookSection = textBook;
         _problems = problems;
     }
-    public string getName() {
-
+    public string getHomework() {
+        return $"Section {_textBookSection} Problems {_problems}"; 
     }
 }
 
 class WritingAssignment: Assignment {
+    private string _title;
+
+    public WritingAssignment(string name, string topic, string title): base(name, topic) {
+        _title = title;
+    }
+
+    public string getInformation() {
+        string studentName = getName();
+        return $"{_title} by {studentName}";
+    }
 
 }
