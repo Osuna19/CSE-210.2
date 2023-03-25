@@ -1,0 +1,4 @@
+93
+SimpleGoal,Popo,NO comer caca,40,0,0,0,True
+EternalGoal,Familia,Casarme,2,0,0,0,False
+ChecklistGoal,No hablarle a los ninos,No ser pedofilo ,20,5,5,0,True
