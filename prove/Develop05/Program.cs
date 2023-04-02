@@ -181,7 +181,7 @@ class Menu {
             }
             else 
             {
-                Console.WriteLine("Invalid choice. Please select again.");
+                Console.WriteLine("Invalid choice. Please select again other choice.");
             }
             
             Console.WriteLine();
