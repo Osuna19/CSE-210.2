@@ -4,16 +4,16 @@ class Program
 {
     static void Main(string[] args)
     {
-        Console.Write("What is your first name? ");
-        
-        string first = Console.ReadLine() ?? "";
-        Console.Write("What is your last name? ");
-        string last = Console.ReadLine() ?? "";
+        List<string> myList = new List<string>();
+        myList.Add("apple");
+        myList.Add("banana");
+        myList.Add("cherry");
 
-        Console.WriteLine("");
-        Console.WriteLine($"your name is {last}, {first} {last}.");
-
-       
+        foreach (string item in myList)
+        {
+            Console.WriteLine(item);
+        }
+    
     }
     
 

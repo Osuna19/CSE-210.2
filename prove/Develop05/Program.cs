@@ -114,7 +114,7 @@ class Menu {
             else if (choice == "4")
             {
                     Console.WriteLine("write the file name to load: ");
-                    string fileName = Console.ReadLine();
+                    // string fileName = Console.ReadLine();
                     Files files = new Files();
                     (List<Goal> goals, totalPoints) = files.Load();
                      foreach (Goal goal in goals) {
